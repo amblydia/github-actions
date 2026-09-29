@@ -116,6 +116,7 @@ jobs:
           # appears in the process list on the runner.
           body="$RUNNER_TEMP/coolify-response.json"
           status=$(curl --silent --show-error --max-time 60 \
+            --request POST \
             --output "$body" --write-out '%{http_code}' \
             --header @- "$COOLIFY_WEBHOOK" <<< "Authorization: Bearer ${COOLIFY_TOKEN}") || {
             echo "::error::Could not reach Coolify. The image was pushed but not deployed."
